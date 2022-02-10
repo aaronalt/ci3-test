@@ -31,8 +31,12 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-
+$route['prodCRUD'] = "prodCRUD/index";
+$route['prodCRUD/(:num)'] = "prodCRUD/show/$1";
+$route['prodCRUDCreate']['post'] = "prodCRUD/store";
+$route['prodCRUDEdit/(:any)'] = "prodCRUD/edit/$1";
+$route['prodCRUDUpdate/(:any)']['put'] = "prodCRUD/update/$1";
+$route['prodCRUDDelete/(:any)']['delete'] = "prodCRUD/delete/$1";
 /*
  * --------------------------------------------------------------------
  * Additional Routing
