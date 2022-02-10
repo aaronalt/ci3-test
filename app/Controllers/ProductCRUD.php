@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use CodeIgniter\Controller;
+use App\Models\ProductModel;
+use App\Models\ProductListModel;
 use App\Models\UserModel;
 
 class ProductCRUD extends Controller
@@ -10,45 +12,33 @@ class ProductCRUD extends Controller
     {
         parent::__construct();
         
-        $this->load->model('ProductCRUDModel'); // create model
-        $this->prodCrud = new ProductCRUDModel; // create model
+        $this->load->model('ProductModel'); 
+        $this->prodCrud = new ProductModel; 
+        $this->prodList = new ProductListModel;
     }
 
     public function index()
     {
-        $data['data'] = $this->prodCrud->get_prodCrud();
+        // user gets list of all products 
+        $data['data'] = $this->prodCrud->get_products();
         $this->load->view('prodCrud/list', $data);
     }
 
-    public function show($id)
+    public function edit_list($prodID, $qty)
     {
-        $product = $this->prodCrud->find_product($id);
-        $this->load->view('prodCrud/show', array('product'=>$product));
+        $user = $this->session->$_GET('id', $this->UserModel);
+        $product = $this->prodCrud->find_product($prodID);
+        $prod_list = [
+            'user' => $this->$user,
+            'product' => $this->$product,
+            'quantity' => $this->$qty
+        ];
+        $this->update_list($prod_list);
     }
 
-    public function create()
+    public function update_list($data)
     {
-        $this->load->view('prodCrud/create');
-    }
-
-    public function store()
-    {
-        $this->prodCrud->insert_product();
-    }
-
-    public function edit($id)
-    {
-        $product = $this->prodCrud->find_product();
-        $this->load->view('prodCrud/edit', array('product'=>$product));
-    }
-
-    public function update($id)
-    {
-        $this->prodCrud->update_product($id);
-    }
-
-    public function delete($id)
-    {
-        $product = $this->prodCrud->delete_product($id);
+        // users product list updates when product is added
+        $this->prodList->save($data);
     }
 }
