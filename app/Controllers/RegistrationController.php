@@ -26,6 +26,7 @@ class RegistrationController extends Controller
                 'name'        => $this->request->getVar('name'),
                 'email'       => $this->request->getVar('email'),
                 'password'    => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'role'        => 1, // 1 for admin, 2 for user
                 'is_verified' => FALSE 
             ];
             $this->send_confirmation($data);
