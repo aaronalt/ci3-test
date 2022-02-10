@@ -9,6 +9,7 @@ class UserModel extends Model{
         'name',
         'email',
         'password',
+        'role',
         'is_verified',
         'created_at'
     ];
