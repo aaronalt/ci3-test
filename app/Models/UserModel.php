@@ -19,4 +19,12 @@ class UserModel extends Model{
         $this->db->insert($data);
         return TRUE;
     }
+
+    function get_user($id)
+    {
+        $this->db->select($id);
+        $this->db->from('users');
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
