@@ -37,6 +37,7 @@ $route['prodCRUDCreate']['post'] = "prodCRUD/store";
 $route['prodCRUDEdit/(:any)'] = "prodCRUD/edit/$1";
 $route['prodCRUDUpdate/(:any)']['put'] = "prodCRUD/update/$1";
 $route['prodCRUDDelete/(:any)']['delete'] = "prodCRUD/delete/$1";
+$route['admin'] = 'admin/dashboard';
 /*
  * --------------------------------------------------------------------
  * Additional Routing

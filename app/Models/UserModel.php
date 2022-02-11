@@ -10,6 +10,8 @@ class UserModel extends Model{
         'email',
         'password',
         'role',
+        'attached_products',
+        'is_active',
         'is_verified',
         'created_at'
     ];

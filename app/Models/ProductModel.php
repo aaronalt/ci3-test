@@ -10,7 +10,7 @@ class ProductModel extends Model{
         'description',
         'price',
         'image',
-        'status',
+        'is_active',
         'created_at',
         'deleted_at'
     ];
